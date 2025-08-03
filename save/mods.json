@@ -1,0 +1,16 @@
+{
+  "oneloader": true,
+  "thedreamer": true,
+  "_conflictResolutions": {
+    "omoexe\u0000thedreamer": 1
+  },
+  "_deltaPreference": {},
+  "_autoUpdater": {
+    "check": "allow",
+    "askedYet": true,
+    "lastCheck": 1754252970811,
+    "lastCheckVersion": "1.5",
+    "performUpdate": false
+  },
+  "omoexe": true
+}
