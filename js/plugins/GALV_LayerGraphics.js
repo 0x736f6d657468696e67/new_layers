@@ -254,6 +254,10 @@ Galv.pCmd.LAYER = function(arguments) {
 Galv.pCmd.LAYER_S = function(arguments) {
 	Galv.LG.createLayerS(arguments);
 };
+
+Galv.pCmd.LAYER_BG = function(arguments) {
+  Galv.LG.createBGLayer(arguments);
+}
 // END GALV'S PLUGIN MANAGEMENT
 
 
@@ -293,21 +297,15 @@ Galv.LG.createLayer = function(config) {
 	// create object
 	$gameMap.layerSettings[mapid][id] = {
 		graphic: config[2],                      // filename of the graphic in /img/layers/
-		xspeed: Galv.LG.num(config[7]),          // speed the layer will scroll horizontally
-		yspeed: Galv.LG.num(config[8]),          // speed the layer will scroll vertically
-		opacity: Galv.LG.num(config[9]),         // the opacity of the layer
-		z: Galv.LG.num(config[10]),               // what level the layer is displayed at (ground is 0)
-		xshift: Galv.LG.num(config[11]),          // Moves the layer at a different x amount than the map (0 to not move)
-		yshift: Galv.LG.num(config[12]),          // Moves the layer at a different y amount than the map (0 to not move)
-		blend: Galv.LG.num(config[13]),           // Blend mode  (0 = normal, 1 = add, 2 = multiply, 3 = screen)
-        isIgnoreCameraX: Galv.LG.num(config[14]),   // camera horizontal position would not effect the movement of the layer.
-        isIgnoreCameraY: Galv.LG.num(config[15]),   // camera vertical position would not effect the movement of the layer.
+		xspeed: Galv.LG.num(config[3]),          // speed the layer will scroll horizontally
+		yspeed: Galv.LG.num(config[4]),          // speed the layer will scroll vertically
+		opacity: Galv.LG.num(config[5]),         // the opacity of the layer
+		z: Galv.LG.num(config[6]),               // what level the layer is displayed at (ground is 0)
+		xshift: Galv.LG.num(config[7]),          // Moves the layer at a different x amount than the map (0 to not move)
+		yshift: Galv.LG.num(config[8]),          // Moves the layer at a different y amount than the map (0 to not move)
+		blend: Galv.LG.num(config[9]),           // Blend mode  (0 = normal, 1 = add, 2 = multiply, 3 = screen)
 		currentx: x_exist,                       // origin x saved. Reset this on map change
 		currenty: y_exist,                       // origin y saved. Reset this on map change
-        canvasx: Galv.LG.num(config[3]),         // canvas x origin. This value will not change for the layer's lifetime
-        canvasy: Galv.LG.num(config[4]),         // canvas y origin. This value will not change for the layer's lifetime
-        width: Galv.LG.num(config[5]),           // canvas width. This value will not change for the layer's lifetime
-        height: Galv.LG.num(config[6]),          // canvas height. This value will not change for the layer's lifetime
 	};
 };
 
@@ -337,6 +335,55 @@ Galv.LG.createLayerS = function(config) {
 		rotate: config[11] ? Galv.LG.num(config[11]) : 0,     // rotate? 0 for no, 1 for yes
 	};
 
+};
+
+// CREATE A BACKGROUND TILING LAYER
+//-----------------------------------------------------------------------------
+Galv.LG.createBGLayer = function(config) {
+	switch (config[0]) {
+	case 'REFRESH':
+		// Recreate layer graphics
+		SceneManager._scene._spriteset.createLayerGraphics();
+		return;
+	case 'REMOVE':
+		// Remove specified layer object
+		var mapid = Galv.LG.num(config[1]);
+		var id = Galv.LG.num(config[2]);
+		if (id) {
+			$gameMap.layerSettings[mapid][id] = {};
+		} else {
+			$gameMap.layerSettings[mapid] = {};
+		};
+		return;
+	};
+	
+	// get variables
+	var mapid = Galv.LG.num(config[0]);
+	var id = Galv.LG.num(config[1]);
+	$gameMap.layerSettings[mapid] = $gameMap.layerSettings[mapid] || {};
+	$gameMap.layerSettings[mapid][id] = $gameMap.layerSettings[mapid][id] || {};
+	
+	var x_exist = $gameMap.layerSettings[mapid][id].currentx || 0;
+	var y_exist = $gameMap.layerSettings[mapid][id].currenty || 0;
+	
+	// create object
+	$gameMap.layerSettings[mapid][id] = {
+    	background: true,
+		graphic: config[2],                      // filename of the graphic in /img/layers/
+        canvasx: Galv.LG.num(config[3]),         // canvas x origin. This value will not change for the layer's lifetime
+        canvasy: Galv.LG.num(config[4]),         // canvas y origin. This value will not change for the layer's lifetime
+        width: Galv.LG.num(config[5]),           // canvas width. This value will not change for the layer's lifetime
+        height: Galv.LG.num(config[6]),          // canvas height. This value will not change for the layer's lifetime
+		xspeed: Galv.LG.num(config[7]),          // speed the layer will scroll horizontally
+		yspeed: Galv.LG.num(config[8]),          // speed the layer will scroll vertically
+		opacity: Galv.LG.num(config[9]),         // the opacity of the layer
+		z: Galv.LG.num(config[10]),               // what level the layer is displayed at (ground is 0)
+		xshift: Galv.LG.num(config[11]),          // Moves the layer at a different x amount than the map (0 to not move)
+		yshift: Galv.LG.num(config[12]),          // Moves the layer at a different y amount than the map (0 to not move)
+		blend: Galv.LG.num(config[13]),           // Blend mode  (0 = normal, 1 = add, 2 = multiply, 3 = screen)
+		currentx: x_exist,                       // origin x saved. Reset this on map change
+		currenty: y_exist,                       // origin y saved. Reset this on map change
+	};
 };
 
 
@@ -478,6 +525,7 @@ Galv.LG.Spriteset_Map_createlowerlayer = Spriteset_Map.prototype.createLowerLaye
 Spriteset_Map.prototype.createLowerLayer = function() {
     Galv.LG.Spriteset_Map_createlowerlayer.call(this);
 	this.layerGraphics = this.layerGraphics || {};
+	alert('this is lower layer');
 	this.createLayerGraphics();
 };
     
@@ -494,13 +542,19 @@ Spriteset_Map.prototype.createLayerGraphics = function() {
 			if (mapGraphics[id]) {
 				if (mapGraphics[id].static) { // If layer created using LAYER_S
 					this.layerGraphics[id] = new Sprite_LayerGraphicS(id);
-				} else {
+				} else if (mapGraphics[id].background) { // If layer created using LAYER_BG
 					this.layerGraphics[id] = new Sprite_LayerGraphic(id);
-                    const width = mapGraphics.width === -1 ? Graphics.width : mapGraphics.width ?? 0;
-                    const height = mapGraphics.height === -1 ? Graphics.height : mapGraphics.height ?? 0;
+          const width = mapGraphics[id].width == -1 ? Graphics.width : mapGraphics[id].width ?? 0;
+          const height = mapGraphics[id].height == -1 ? Graphics.height : mapGraphics[id].height ?? 0;
                     // Set the canvas properties
-					this.layerGraphics[id].move(mapGraphics.canvasx, mapGraphics.canvasy,  width, height);
-				};
+
+					alert(`createGraphicsX: ${mapGraphics[id].canvasx}`)
+					this.layerGraphics[id].move(-100, -100,  width, height);
+				} else {
+          this.layerGraphics[id] = new Sprite_LayerGraphic(id);
+          // Set the canvas properties
+          this.layerGraphics[id].move(0,0, Graphics.width, Graphics.height);
+        }
 			};
 		};
 
@@ -561,6 +615,14 @@ Game_Map.prototype.createNoteLayers = function(mapId) {
 
 			if (!this.layerSettings[mapId][Number(config[1])]) {
 				Galv.LG.createLayerS(config);
+			};
+		};
+		if (txtArray[i].indexOf("LAYER_BG ") >= 0) {
+			var config = (mapId + txtArray[i].replace('LAYER_BG','')).split(" ");
+			// If layer doesn't already exist, create it:
+			if (!this.layerSettings[mapId][Number(config[1])]) {
+				alert('This is the config', config)
+				Galv.LG.createBGLayer(config);
 			};
 		};
 	};
@@ -645,12 +707,9 @@ Sprite_LayerGraphic.prototype.updatePosition = function() {
 	this.opacity = this.lValue().opacity || 0;
 	this.blendMode = this.lValue().blend || 0;
     
-    const displayDisplacementX = this.lValue().isIgnoreCameraX == 0 ? this.displayX() : 0;
-    const displayDisplacementY = this.lValue().isIgnoreCameraY == 0 ? this.displayY() : 0;
-    
 	
-	this.origin.x = 0 + displayDisplacementX * Galv.LG.tileSize + this.lValue().currentx + this.xOffset();
-	this.origin.y = 0 + displayDisplacementY * Galv.LG.tileSize + this.lValue().currenty + this.yOffset();
+	this.origin.x = 0 + this.displayX() * Galv.LG.tileSize + this.lValue().currentx + this.xOffset();
+	this.origin.y = 0 + this.displayY() * Galv.LG.tileSize + this.lValue().currenty + this.yOffset();
 	this.lValue().currentx += this.lValue().xspeed;
 	this.lValue().currenty += this.lValue().yspeed;
 };
@@ -663,7 +722,6 @@ Sprite_LayerGraphic.prototype.yOffset = function() {
 	return this.displayY() * this.lValue().yshift;
 };
 
-
 Sprite_LayerGraphic.prototype.displayX = function() {
 	return $gameMap.displayX();
 };
@@ -674,6 +732,7 @@ Sprite_LayerGraphic.prototype.displayY = function() {
 Sprite_LayerGraphic.prototype.displayXBattle = function() {
 	return 0;
 };
+
 Sprite_LayerGraphic.prototype.displayYBattle = function() {
 	return 0;
 };
