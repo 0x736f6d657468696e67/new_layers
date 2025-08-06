@@ -372,8 +372,8 @@ Galv.LG.createBGLayer = function(config) {
 		graphic: config[2],                      // filename of the graphic in /img/layers/
         canvasx: Galv.LG.num(config[3]),         // canvas x origin. This value will not change for the layer's lifetime
         canvasy: Galv.LG.num(config[4]),         // canvas y origin. This value will not change for the layer's lifetime
-        width: Galv.LG.num(config[5]),           // canvas width. This value will not change for the layer's lifetime
-        height: Galv.LG.num(config[6]),          // canvas height. This value will not change for the layer's lifetime
+        width:config[5],           // canvas width. This value will not change for the layer's lifetime
+        height: config[6],          // canvas height. This value will not change for the layer's lifetime
 		xspeed: Galv.LG.num(config[7]),          // speed the layer will scroll horizontally
 		yspeed: Galv.LG.num(config[8]),          // speed the layer will scroll vertically
 		opacity: Galv.LG.num(config[9]),         // the opacity of the layer
@@ -525,7 +525,6 @@ Galv.LG.Spriteset_Map_createlowerlayer = Spriteset_Map.prototype.createLowerLaye
 Spriteset_Map.prototype.createLowerLayer = function() {
     Galv.LG.Spriteset_Map_createlowerlayer.call(this);
 	this.layerGraphics = this.layerGraphics || {};
-	alert('this is lower layer');
 	this.createLayerGraphics();
 };
     
@@ -544,12 +543,12 @@ Spriteset_Map.prototype.createLayerGraphics = function() {
 					this.layerGraphics[id] = new Sprite_LayerGraphicS(id);
 				} else if (mapGraphics[id].background) { // If layer created using LAYER_BG
 					this.layerGraphics[id] = new Sprite_LayerGraphic(id);
-          const width = mapGraphics[id].width == -1 ? Graphics.width : mapGraphics[id].width ?? 0;
-          const height = mapGraphics[id].height == -1 ? Graphics.height : mapGraphics[id].height ?? 0;
+        //   const width = mapGraphics[id].width == -1 ? Graphics.width : mapGraphics[id].width ;
+        //   const height = mapGraphics[id].height == -1 ? Graphics.height : mapGraphics[id].height;
+          const width = Galv.LG.num(eval(mapGraphics[id].width));
+          const height = Galv.LG.num(eval(mapGraphics[id].height));
                     // Set the canvas properties
-
-					alert(`createGraphicsX: ${mapGraphics[id].canvasx}`)
-					this.layerGraphics[id].move(-100, -100,  width, height);
+                    this.layerGraphics[id].move(mapGraphics[id].canvasx,mapGraphics[id].canvas,width,height);
 				} else {
           this.layerGraphics[id] = new Sprite_LayerGraphic(id);
           // Set the canvas properties
@@ -580,12 +579,13 @@ Game_Map.prototype.initialize = function() {
 Galv.LG.Game_Map_setup = Game_Map.prototype.setup;
 Game_Map.prototype.setup = function(mapId) {
 	Galv.LG.Game_Map_setup.call(this,mapId);
-    if (this.layerSettings) {
-	this.layerSettings[mapId] = this.layerSettings[mapId] || {} 
-    } else {
-    this.layerSettings = { [mapId]: {} }
-    }
-
+    // if (this.layerSettings) {
+	// this.layerSettings[mapId] = this.layerSettings[mapId] || {} 
+    // } else {
+    // this.layerSettings = { [mapId]: {} }
+    // }
+	this.layerSettings[mapId] = this.layerSettings[mapId] || {}
+    //
 	// Setup map notetag layers
 	this.createNoteLayers(mapId);
 	
@@ -621,7 +621,6 @@ Game_Map.prototype.createNoteLayers = function(mapId) {
 			var config = (mapId + txtArray[i].replace('LAYER_BG','')).split(" ");
 			// If layer doesn't already exist, create it:
 			if (!this.layerSettings[mapId][Number(config[1])]) {
-				alert('This is the config', config)
 				Galv.LG.createBGLayer(config);
 			};
 		};
