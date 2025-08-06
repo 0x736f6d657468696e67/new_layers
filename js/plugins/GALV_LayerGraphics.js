@@ -74,7 +74,7 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  * ----------------------------------------------------------------------------
  * To create or change a layer graphic, the following plugin command is used:
  *
- *   LAYER MAPID ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND XCAMERA YCAMERA
+ *   LAYER MAPID ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND
  *
  * Each property is separated by a space and you will exchange the property
  * names above with values.
@@ -94,8 +94,6 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  *              - Make XSHIFT and YSHIFT = 0 to move with map
  * BLEND        - Blend mode (0 = normal, 1 = add, 2 = multiply, 3 = screen)
  *              - *NOTE RPG Maker MV version 1.1 mutliply isn't supported
- * XCAMERA       - Should the camera be ignored in the horizontal movemet of the layer (0 = false, 1 = true)
- * YCAMERA       - Should the camera be ignored in the vertical movemet of the layer (0 = false, 1 = true)
  * X            - The X position of the static layer image on the map.
  * Y            - The Y position of the static layer image on the map.
  * WIDTH        - The width of the static layer image on the map. ( -1 = Width of screen )
@@ -524,7 +522,7 @@ Spriteset_Battle.prototype.createLayerGraphics = function() {
 Galv.LG.Spriteset_Map_createlowerlayer = Spriteset_Map.prototype.createLowerLayer;
 Spriteset_Map.prototype.createLowerLayer = function() {
     Galv.LG.Spriteset_Map_createlowerlayer.call(this);
-	this.layerGraphics = this.layerGraphics || {};
+	this.layerGraphics = this.layerGraphics || {};   
 	this.createLayerGraphics();
 };
     
@@ -548,7 +546,8 @@ Spriteset_Map.prototype.createLayerGraphics = function() {
           const width = Galv.LG.num(eval(mapGraphics[id].width));
           const height = Galv.LG.num(eval(mapGraphics[id].height));
                     // Set the canvas properties
-                    this.layerGraphics[id].move(mapGraphics[id].canvasx,mapGraphics[id].canvas,width,height);
+                    // this.layerGraphics[id].move(mapGraphics[id].canvasx,mapGraphics[id].canvasy,width,height);
+                    this.layerGraphics[id].move(mapGraphics[id].canvasx,mapGraphics[id].canvasy,width,height);
 				} else {
           this.layerGraphics[id] = new Sprite_LayerGraphic(id);
           // Set the canvas properties
@@ -560,7 +559,9 @@ Spriteset_Map.prototype.createLayerGraphics = function() {
 		// If settings are empty for the layer
 		if (Galv.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
 			var ind = this._tilemap.children.indexOf(this.layerGraphics[id]);
+			if(ind !== -1) {
 			this._tilemap.removeChildAt(ind);
+			}
 		} else {
 			this._tilemap.addChild(this.layerGraphics[id]);
 		};

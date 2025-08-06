@@ -33,15 +33,22 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('parallax_noteina
         if (parallaxMaps['special_parallax'].contains(String(mapId))) {
             switch (mapId) {
                 case 127:  // SOLAR SYSTEM
-                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.2 0 255 0 10 0 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 0.3 0 255 0 15 0 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.3 0 255 0 25 0 0 1 1`
+                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.2 0 255 0 10 0 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 15 0 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 25 0 0 1 1`
                     $dataMap.parallaxName = '';
                     $dataMap.parallaxNameSx = 0;
                     $dataMap.parallaxNameSy = 0;
                     $dataMap.scrollType = 0;
                     return;
                 case 325:  // OTHERWORLD LADDER II
+                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 10 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 20 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 30 0 1 1`
+                    $dataMap.parallaxName = '';
+                    $dataMap.parallaxNameSx = 0;
+                    $dataMap.parallaxNameSy = 0;
+                    $dataMap.scrollType = 0;
+                    return;
                 case 489:
-                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.2 0 255 0 0 10 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 0.3 0 255 0 3 20 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.4 0 255 0 5 30 0 1 1`
+                    // TODO: Add Startracks !
+                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0 -0.5 255 0 0 10 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0 -4 255 0 3 20 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0 -15 255 0 5 30 0 1 1\nLAYER_BG 4 big_stars_parallax 20 80 Graphics.width Graphics.height 0 -8 255 0 5 30 0 1 1`
                     $dataMap.parallaxName = '';
                     $dataMap.parallaxNameSx = 0;
                     $dataMap.parallaxNameSy = 0;
@@ -49,27 +56,27 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('parallax_noteina
                     return;
                 case 336: // PYREFLY TO SWEETHEART
                 case 436: // BALCONY (in sweethearts' castle)
-                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.2 0 255 0 0 2 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 0.3 0 255 0 3 15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.4 0 255 0 5 20 0 1 1`
+                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 2 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 20 0 1 1`
                     $dataMap.parallaxName = '';
                     $dataMap.parallaxNameSx = 0;
                     $dataMap.parallaxNameSy = 0;
                     $dataMap.scrollType = 0;
                     return;
                 case 466: // NEIGHBOR'S BEDROOM 
-                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.1 -0.2 255 0 0 -10 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 -0.3 0 255 0 3 -15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.3 0 255 5 5 8 0 1 1`
+                    $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.1 -0.2 255 0 0 -10 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height -0.3 0 255 0 3 -15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 5 5 8 0 1 1`
                     $dataMap.parallaxName = '';
                     $dataMap.parallaxNameSx = 0;
                     $dataMap.parallaxNameSy = 0;
                     $dataMap.scrollType = 0;
                     return;
                 case 496: // NEIGHBOR'S PATH
-                    if ($gameVariables.value(1075) >= 16) { // only the section of the map where the parallax is supposed to be
-                        $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.2 0 255 0 0 2 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 0.3 0 255 0 3 15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.4 0 255 0 5 20 0 1 1`
+                    // if ($gameVariables.value(1075) >= 16) { // only the section of the map where the parallax is supposed to be
+                        $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 2 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 15 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 20 0 1 1`
                         $dataMap.parallaxName = '';
                         $dataMap.parallaxNameSx = 0;
                         $dataMap.parallaxNameSy = 0;
                         $dataMap.scrollType = 0;
-                    }
+                    // }
                     return;
             }
             return;
@@ -82,7 +89,8 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('parallax_noteina
             if( mapId === 496 && $gameVariables.value(1075) < 16 ) {
                 return;
             }
-            $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 -1 -1 0.2 0 255 0 0 0 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 -1 -1 0.3 0 255 0 3 0 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 -1 -1 0.4 0 255 0 5 0 0 1 1`
+            $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_background_parallax 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 0 0 1 1\nLAYER_BG 2 small_stars_parallax 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 0 0 1 1\nLAYER_BG 3 big_stars_parallax 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 0 0 1 1`
+            // $dataMap.note = `${$dataMap.note}\nLAYER 1 space_background_parallax 0.2 0 255 0 0 0 0\nLAYER 2 small_stars_parallax 0.3 0 255 0 3 0 0\nLAYER 3 big_stars_parallax 0.4 0 255 0 5 0 0`
             $dataMap.parallaxName = '';
             $dataMap.parallaxNameSx = 0;
             $dataMap.parallaxNameSy = 0;
@@ -90,7 +98,7 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('parallax_noteina
             return;
         }
         if (parallaxMaps['underwater_parallax'].contains(String(mapId))) {
-            $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 underwater_parallax_1 100 100 Graphics.width Graphics.height 0.15 0 255 0 0 0 0 1 1\nLAYER_BG 2 underwater_parallax_2 0 0 Graphics.width Graphics.height -0.2 0.1 255 0 3 0 0 1 1\nLAYER_BG 3 underwater_parallax_3 0 0 Graphics.width Graphics.height 0.1 0.4 255 0 6 0 0 1 1\nLAYER_BG 4 underwater_parallax_4 0 0 Graphics.width Graphics.height 0.1 0.1 255 0 4 1 3 1 1`
+            $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 underwater_parallax_1 0 0 Graphics.width Graphics.height 0.15 0 255 0 0 0 0 1 1\nLAYER_BG 2 underwater_parallax_2 0 0 Graphics.width Graphics.height -0.2 0.1 255 0 3 0 0 1 1\nLAYER_BG 3 underwater_parallax_3 0 0 Graphics.width Graphics.height 0.1 0.4 255 0 6 0 0 1 1\nLAYER_BG 4 underwater_parallax_4 0 0 Graphics.width Graphics.height 0.1 0.1 255 0 4 1 3 1 1`
             $dataMap.parallaxName = '';
             $dataMap.parallaxNameSx = 0;
             $dataMap.parallaxNameSy = 0;
