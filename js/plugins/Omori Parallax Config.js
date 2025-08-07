@@ -10,13 +10,19 @@
  * @param Underwater Parallax
  * @desc MapIds for underwater (parallax_dw_1) parallax background.
  * @default 211,191,203,430,204,194,192,193,195,196,197,453
-*/
 
-/**************************************************************************************************
+@help
+**************************************************************************************************
  *   THIS PLUGIN IS MADE AS A COMPANION TO A MODIFIED VERSION OF THE GALV_LAYERGRAPHICS PLUGIN.   *
- *              THE PLUGIN WOULD NOT WORK WITHOUT THE MODIFIED PLUGIN                             *
+ *              THIS PLUGIN WOULD NOT WORK WITHOUT THE OTHER ONE                                  *
  * It assigns a tailored-for-parallax background to maps selected by the user (via their Mapid).  *
- **************************************************************************************************/
+**************************************************************************************************
+ This script assigns parallax configurations to designated maps.
+ It uses a modified version of the 'LAYER' command in GALV_LayerGraphics - LAYER_BG. 
+ Documentation on it is in the modified GALV_LayerGraphics.js plugin.
+ It's difference from the normal 'LAYER' command is only that it lets the user choose a position and dimensions for the canvas on which the layer will be drawned upon.
+ This is useful for scenes in OMORI where effects such as shaking the screen is used: the edges of canvas may appear in the corners and by setting the layer beyond the edge we cover it up.
+ */
 
 var parallaxMaps = {};
 
@@ -34,50 +40,28 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori Parallax C
             switch (mapId) {
                 case 127:  // SOLAR SYSTEM
                     $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 10 0 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 15 0 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.3 0 255 0 25 0 0`
-                    $dataMap.parallaxName = '';
-                    $dataMap.parallaxNameSx = 0;
-                    $dataMap.parallaxNameSy = 0;
-                    $dataMap.scrollType = 0;
-                    return;
+                    break;
                 case 325:  // OTHERWORLD LADDER II
                     $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 10 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 20 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 30 0`
-                    $dataMap.parallaxName = '';
-                    $dataMap.parallaxNameSx = 0;
-                    $dataMap.parallaxNameSy = 0;
-                    $dataMap.scrollType = 0;
-                    return;
+                    break;
                 case 489: // PLUTO'S RIDE
                     $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0 -0.5 255 0 0 10 0 1 1\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0 -4 255 0 3 20 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0 -10 255 0 5 30 0\nLAYER_BG 4 space_parallax_fast 0 0 Graphics.width Graphics.height 0 -20 255 5 5 30 0`
-                    $dataMap.parallaxName = '';
-                    $dataMap.parallaxNameSx = 0;
-                    $dataMap.parallaxNameSy = 0;
-                    $dataMap.scrollType = 0;
-                    return;
+                    break;
                 case 336: // PYREFLY TO SWEETHEART
                 case 436: // BALCONY (in sweethearts' castle)
                     $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 2 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 15 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 20 0`
-                    $dataMap.parallaxName = '';
-                    $dataMap.parallaxNameSx = 0;
-                    $dataMap.parallaxNameSy = 0;
-                    $dataMap.scrollType = 0;
-                    return;
+                    break;
                 case 466: // NEIGHBOR'S BEDROOM 
                     $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.1 -0.2 255 0 0 -10 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height -0.3 0 255 0 3 -15 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.3 0 255 5 5 8 0`
-                    $dataMap.parallaxName = '';
-                    $dataMap.parallaxNameSx = 0;
-                    $dataMap.parallaxNameSy = 0;
-                    $dataMap.scrollType = 0;
-                    return;
+                    break;
                 case 496: // NEIGHBOR'S PATH
                     if ($gameVariables.value(1075) >= 16) { // only the section of the map where the parallax is supposed to be
                         $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 2 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 15 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 20 0`
-                        $dataMap.parallaxName = '';
-                        $dataMap.parallaxNameSx = 0;
-                        $dataMap.parallaxNameSy = 0;
-                        $dataMap.scrollType = 0;
                     }
-                    return;
+                    break;
             }
+            // Clear the default parallax set by the game. it's not necessary anymore.
+            this.clearParallax()
             return;
         }
 
@@ -85,24 +69,27 @@ parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori Parallax C
         if (parallaxMaps['space_parallax'].contains(String(mapId))) {
             // NEIGHBOR'S PATH's logic is a bit different. 
             // This will make sure the parallax will not appear when it's not supposed to.
-            if( mapId === 496 && $gameVariables.value(1075) < 16 ) {
+            if (mapId === 496 && $gameVariables.value(1075) < 16) {
                 return;
             }
             $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 0 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 0 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 0 0`
-            $dataMap.parallaxName = '';
-            $dataMap.parallaxNameSx = 0;
-            $dataMap.parallaxNameSy = 0;
-            $dataMap.scrollType = 0;
+            // Clear the default parallax set by the game. it's not necessary anymore.
+            this.clearParallax()
             return;
         }
         if (parallaxMaps['underwater_parallax'].contains(String(mapId))) {
             $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 underwater_parallax_1 0 0 Graphics.width Graphics.height 0.15 0 255 0 0 0 0\nLAYER_BG 2 underwater_parallax_2 0 0 Graphics.width Graphics.height -0.2 0.1 255 0 3 0 0\nLAYER_BG 3 underwater_parallax_3 0 0 Graphics.width Graphics.height 0.1 0.4 255 0 6 0 0\nLAYER_BG 4 underwater_parallax_4 0 0 Graphics.width Graphics.height 0.1 0.1 255 0 4 1 3`
-            $dataMap.parallaxName = '';
-            $dataMap.parallaxNameSx = 0;
-            $dataMap.parallaxNameSy = 0;
-            $dataMap.scrollType = 0;
+            // Clear the default parallax set by the game. it's not necessary anymore.
+            this.clearParallax();
             return;
         }
+    }
+
+    Game_Map.prototype.clearParallax = function () {
+        this._parallaxName = '';
+        this._parallaxNameSx = 0;
+        this._parallaxNameSy = 0;
+        this._scrollType = 0;
     }
 }
 )()

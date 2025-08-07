@@ -577,7 +577,6 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
             if (Galv.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
                 var ind = this._tilemap.children.indexOf(this.layerGraphics[id]);
                 this._tilemap.removeChildAt(ind);
-                // this.layerGraphics.splice(id,1);
                 delete this.layerGraphics[id];
                 delete mapGraphics[id];
             } else {
@@ -598,6 +597,9 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
     Galv.LG.Game_Map_setup = Game_Map.prototype.setup;
     Game_Map.prototype.setup = function (mapId) {
         Galv.LG.Game_Map_setup.call(this, mapId);
+		if(!this.layerSettings) {
+			this.layerSettings = {};
+		}
         this.layerSettings[mapId] = this.layerSettings[mapId] || {}
         //
         // Setup map notetag layers
