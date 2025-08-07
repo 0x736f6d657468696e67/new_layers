@@ -575,13 +575,13 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
 
             // If settings are empty for the layer
             if (Galv.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
-                var ind = this._tilemap.children.findIndex( child => child.id == id  ); 
-			var ind2 = this._tilemap.children.indexOf({...this.layerGraphics[id]});
-                if (ind !== -1) { 
-                    this._tilemap.removeChildAt(ind);
-                }
+                var ind = this._tilemap.children.indexOf(this.layerGraphics[id]);
+                this._tilemap.removeChildAt(ind);
+                // this.layerGraphics.splice(id,1);
+                delete this.layerGraphics[id];
+                delete mapGraphics[id];
             } else {
-                this._tilemap.addChild(this.layerGraphics[id]);
+                this.layerGraphics[id] = this._tilemap.addChild(this.layerGraphics[id]);
             };
         };
     };
