@@ -65,6 +65,8 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  *
  *   LAYER_S MAPID ID GRAPHIC X Y OPACITY Z BLEND
  *
+ *   LAYER_BG MAPID ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND XCAMERA YCAMERA
+ *
  *   LAYER REMOVE MAPID ID
  *
  *   LAYER REFRESH
@@ -151,15 +153,14 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  * be common for most parallax mapping. Z is 0 to appear under the player.
  *
  * ----------------------------------------------------------------------------
-//  * (MODIFICATION FOR BACKGROUNDS IN OMORI)
- *  Finally when creating a background layer you can use:
- *
- *   LAYER_BG MAPID ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND
- *
- * Each property is separated by a space and you will exchange the property
- * names above with values.
+//  * (THIS COMMAND IS MADE FOR BACKGROUNDS IN OMORI)
+*  Finally when creating a background layer you can use:
+*
+*   LAYER_BG MAPID ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND
+* (This Command is a modified LAYER command made separate to retain compatibility)
+*
+ * Each property is separated by a space and you will exchange the property names above with values.
  * 
- * (This Command is a modified LAYER command made separated to retain compatibility)
  *
  * EXPLANATION OF PROPERTIES:
  * LAYER_BG        - do not change this, it is the keyword for the plugin.
@@ -191,6 +192,7 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  * Using Variables
  * if you put a "v" before the property. The number after will be variable id.
  * (USAGE OF GRAPHICS.WIDTH AND GRAPHIC.HEIGHT IS INTENDED ONLY FOR THE WIDTH AND HEIGHT PROPERTIES TO HELP MAKE USEFUL LENGTH CALCULATIONS IN REGARDS TO THE LAYER SIZE)
+ * (WIDTH AND HEIGHT PROPERTIES CANNOT TAKE A VARIABLE BECAUSE IT WAS NOT IMPLEMENTED)
  * ----------------------------------------------------------------------------
  *
  *   LAYER REMOVE MAPID ID  - Remove a layer from a map
@@ -217,6 +219,8 @@ Galv.LG = Galv.LG || {};      // Galv's stuff
  *   LAYER ID GRAPHIC XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND
  *
  *   LAYER_S ID GRAPHIC X Y OPACITY Z BLEND XANCHOR YANCHOR CHAR ROTATE
+ *   
+ *   LAYER_BG ID GRAPHIC X Y WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND
  *
  * These layers can be changed as normal with plugin commands.
  * ----------------------------------------------------------------------------
