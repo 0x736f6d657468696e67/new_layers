@@ -175,6 +175,5 @@ var $plugins =
 {"name":"GTP_OmoriFixes","status":true,"description":"v3.5.0 Bug Fixes and Optimization for OMORI","parameters":{}},
 {"name":"DisableMouse","status":false,"description":"Disables mouse clicks.","parameters":{}},
 {"name":"--------------------","status":false,"description":"------------------------------------------------------------","parameters":{}},
-{"name":"Omori Parallax Config","status":true,"description":"OMORI parallax backgrounds handler.","parameters":{"Special Parallax":"127,325,489,336,436,466,496","Space Parallax":"105,88,92,99,100,103,105,327,106,122,113,332,334,117,119,120,121,124,126,123,143,145,147,429,165,172,173,176,175,177,178,179,180,181,186,198,490,127,325,489,336,436,466,496","Underwater Parallax":"211,191,203,430,204,194,192,193,195,196,197,453"}},
-{"name":"GALV_LayerGraphics","status":true,"description":"(v.2.0) Create graphic layers for parallax mapping, fog, etc. View the 'Help' document for plugin commands and info.","parameters":{"Tile Size":"0"}}
+{"name":"Omori Parallax Config","status":true,"description":"OMORI parallax backgrounds handler.","parameters":{"Special Parallax":"127,325,489,336,436,466,496","Space Parallax":"105,88,92,99,100,103,105,327,106,122,113,332,334,117,119,120,121,124,126,123,143,145,147,429,165,172,173,176,175,177,178,179,180,181,186,198,490,127,325,489,336,436,466,496","Underwater Parallax":"211,191,203,430,204,194,192,193,195,196,197,453"}}
 ];
