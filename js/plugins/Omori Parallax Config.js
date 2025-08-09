@@ -155,7 +155,6 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
                     break;
             }
             // Clear the default parallax set by the game as it's not necessary anymore.
-            this.clearParallax()
             return;
         }
 
@@ -169,7 +168,6 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             }
             $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 0 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 0 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 0 0`
             // Clear the default parallax set by the game as it's not necessary anymore.
-            this.clearParallax()
             return;
         }
 
@@ -177,16 +175,8 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
         if (OLayers.LG.parallaxMaps['underwater_parallax'].contains(String(mapId))) {
             $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 underwater_parallax_1 0 0 Graphics.width Graphics.height 0.15 0 255 0 0 0 0\nLAYER_BG 2 underwater_parallax_2 0 0 Graphics.width Graphics.height -0.2 0.1 255 0 3 0 0\nLAYER_BG 3 underwater_parallax_3 0 0 Graphics.width Graphics.height 0.1 0.4 255 0 6 0 0\nLAYER_BG 4 underwater_parallax_4 0 0 Graphics.width Graphics.height 0.1 0.1 255 0 4 1 3`
             // Clear the default parallax set by the game as it's not necessary anymore.
-            this.clearParallax();
             return;
         }
-    }
-
-    Game_Map.prototype.clearParallax = function () {
-        this._parallaxName = '';
-        this._parallaxNameSx = 0;
-        this._parallaxNameSy = 0;
-        this._scrollType = 0;
     }
 
     /***************************************
@@ -215,6 +205,14 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
         OLayers.LG.createBGLayer(arguments);
     }
     // END PLUGIN MANAGEMENT
+
+    // INITIATE THE LAYERSETTINGS
+    //-----------------------------------------------------------------------------
+    OLayers.LG.onLoad = DataManager.loadMapData
+    DataManager.loadMapData = function (mapId) {
+        OLayers.LG.onLoad.call(this, mapId);
+        $gameMap.oLayerSettings = $gameMap.oLayerSettings || {};
+    }
 
     // CREATE A BACKGROUND TILING LAYER
     //-----------------------------------------------------------------------------
