@@ -435,7 +435,9 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             this.currentGraphic = this.lValue().graphic;
         };
 
+        if (!OLayers.LG.isEmpty(this.lValue())) {
         this.updatePosition();
+        }
     };
 
     // Update Position
