@@ -247,7 +247,6 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
 
         // create object
         $gameMap.oLayerSettings[mapid][id] = {
-            background: true,
             graphic: config[2],                      // filename of the graphic in /img/layers/
             canvasx: OLayers.LG.processArg(config[3]),         // canvas x origin. This value will not change for the layer's lifetime
             canvasy: OLayers.LG.processArg(config[4]),         // canvas y origin. This value will not change for the layer's lifetime
@@ -271,8 +270,10 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
     OLayers.LG.processArg = function (txt) {
         if (!isNaN(txt)) {
             return Number(txt);
-        } else {
+        } else if (typeof txt == 'string') {
             return txt.replace(/v[\d]{4}/g, (match) => { return OLayers.LG.getGameVariable(match.slice(1)) })
+        } else {
+            return undefined;
         };
     };
 
@@ -290,12 +291,9 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
     OLayers.LG.Spriteset_Map_createlowerlayer = Spriteset_Map.prototype.createLowerLayer;
     Spriteset_Map.prototype.createLowerLayer = function () {
         OLayers.LG.Spriteset_Map_createlowerlayer.call(this);
-        if (!$dataMap.oLayerInitialized) {
         this.oLayerGraphics = this.oLayerGraphics || {};
         this.oLayerSettings = this.oLayerSettings || {};
         this.createOLayerGraphics();
-            $dataMap.oLayerInitialized = true;
-        }
     };
 
     Spriteset_Map.prototype.createOLayerGraphics = function () {
@@ -308,24 +306,23 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             if (!this.oLayerGraphics[id] || !this.oLayerGraphics[id].id) {
                 // Create Layer Sprite
                 if (mapGraphics[id]) {
-                    if (mapGraphics[id].background) { // If layer created using LAYER_BG
                         this.oLayerGraphics[id] = new Sprite_LayerGraphic(id);
                         const width = OLayers.LG.processArg(eval(mapGraphics[id].width));
                         const height = OLayers.LG.processArg(eval(mapGraphics[id].height));
                         // Set the canvas properties
                         this.oLayerGraphics[id].move(mapGraphics[id].canvasx, mapGraphics[id].canvasy, width, height);
-                    }
                 };
             };
 
             // If settings are empty for the layer
             if (OLayers.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
-                var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
+                // var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
                 /* Seems like the game removes all the tilemap children on every automatically and just rebuild what it needs.
                    for now I removed this line of code as it doesn't seem to ever be used */
                 // this._tilemap.removeChildAt(ind);
                 delete this.oLayerGraphics[id];
                 delete mapGraphics[id];
+                var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
             } else {
                 this.oLayerGraphics[id] = this._tilemap.addChild(this.oLayerGraphics[id]);
             };
@@ -339,7 +336,6 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
     Game_Map.prototype.initialize = function () {
         OLayers.LG.Game_Map_initialize.call(this);
         this.oLayerSettings = {};   // Store ALL oLayers here.
-        this.oLayerInitialized = false;
     };
 
     OLayers.LG.Game_Map_setup = Game_Map.prototype.setup;
