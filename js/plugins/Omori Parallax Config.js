@@ -290,9 +290,12 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
     OLayers.LG.Spriteset_Map_createlowerlayer = Spriteset_Map.prototype.createLowerLayer;
     Spriteset_Map.prototype.createLowerLayer = function () {
         OLayers.LG.Spriteset_Map_createlowerlayer.call(this);
+        if (!$dataMap.oLayerInitialized) {
         this.oLayerGraphics = this.oLayerGraphics || {};
         this.oLayerSettings = this.oLayerSettings || {};
         this.createOLayerGraphics();
+            $dataMap.oLayerInitialized = true;
+        }
     };
 
     Spriteset_Map.prototype.createOLayerGraphics = function () {
@@ -318,7 +321,9 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             // If settings are empty for the layer
             if (OLayers.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
                 var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
-                this._tilemap.removeChildAt(ind);
+                /* Seems like the game removes all the tilemap children on every automatically and just rebuild what it needs.
+                   for now I removed this line of code as it doesn't seem to ever be used */
+                // this._tilemap.removeChildAt(ind);
                 delete this.oLayerGraphics[id];
                 delete mapGraphics[id];
             } else {
@@ -334,6 +339,7 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
     Game_Map.prototype.initialize = function () {
         OLayers.LG.Game_Map_initialize.call(this);
         this.oLayerSettings = {};   // Store ALL oLayers here.
+        this.oLayerInitialized = false;
     };
 
     OLayers.LG.Game_Map_setup = Game_Map.prototype.setup;
@@ -366,7 +372,7 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             if (txtArray[i].indexOf("LAYER_BG ") >= 0) {
                 var config = (mapId + txtArray[i].replace('LAYER_BG', '')).split(" ");
                 // If layer doesn't already exist, create it:
-                if (!this.oLayerSettings[mapId][Number(config[1])]) {
+                if (!this.oLayerSettings[mapId][Number(config[1])] || OLayers.LG.isEmpty(this.oLayerSettings[mapId][Number(config[1])])) {
                     OLayers.LG.createBGLayer(config);
                 };
             };
