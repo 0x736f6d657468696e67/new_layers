@@ -15,7 +15,8 @@
 /***************************************************************************************************************************************************************************************************
  * *********************************************************************************************************************************************************************************************** *
  *                                               **************************************************************************************************                                                *
- *                                                   THIS PLUGIN IS MADE AS A COMPANION TO A MODIFIED VERSION OF THE GALV_LAYERGRAPHICS PLUGIN.                                                    *
+ *                             THIS PLUGIN USES MODIFIED VERSION OF THE GALV_LAYERGRAPHICS PLUGIN. AND AS SUCH MOST OF THE CODE IS COPIED FROM THE STATED PLUGIN             *
+ *                                                     AS SUCH CREDITS SHALL BE ATTRIBUTED TO Galv's Scripts: https://galvs-scripts.com/                                                           *
  *                                                         IT ASSIGNS PRE-MADE PARALLAXES TO MAPS SELECTED BY THE USER (VIA THEIR MAPID).                                                          *
  *                                                                        THIS PLUGIN WOULD NOT WORK WITHOUT THE OTHER ONE                                                                         *
  *                                                        OMORI PARALLAX CONFIG SHOULD BE PLACED ABOVE GALV_LAYERGRAPHICS FOR IT TO WORK !!                                                        *
