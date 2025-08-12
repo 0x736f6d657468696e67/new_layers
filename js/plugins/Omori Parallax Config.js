@@ -316,13 +316,14 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
 
             // If settings are empty for the layer
             if (OLayers.LG.isEmpty(mapGraphics[id]) || mapGraphics[id]["graphic"] == "") {
-                // var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
                 /* Seems like the game removes all the tilemap children on every automatically and just rebuild what it needs.
                    for now I removed this line of code as it doesn't seem to ever be used */
-                // this._tilemap.removeChildAt(ind);
+                var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
+                if(ind !== -1) {
+                this._tilemap.removeChildAt(ind);
+                }
                 delete this.oLayerGraphics[id];
                 delete mapGraphics[id];
-                var ind = this._tilemap.children.indexOf(this.oLayerGraphics[id]);
             } else {
                 this.oLayerGraphics[id] = this._tilemap.addChild(this.oLayerGraphics[id]);
             };
