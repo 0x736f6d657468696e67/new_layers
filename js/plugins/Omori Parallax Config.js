@@ -117,8 +117,11 @@
  *                                                            *   APPLYING PARALLAXES TO MAPS WITH THE CONFIGURATION SECTION                                                                       *
  * *********************************************************************************************************************************************************************************************** *
  *  TO KEEP THE CONFIGURATIONS MADE TO THE SPACE PARALLAX EASILY MODIFIABLE A LOT OF THE CODE IS WRITTEN HERE IN THE PLUGIN.                                                                       *
+ *                                                                                                                                                                                                 *
  *  THE PLUGIN TAKES MULTIPLE LISTS OF MAPIDS ONTO WHICH TO APPLY A CERTAIN PARALLAX EFFECT.                                                                                                       *
  *  ALL THE LISTS ARE WITHOUT SPACES AND MAPIDS ARE SEPARATED BY A COMMA. FOR EXAMPLE: 158,35,122,43                                                                                               *
+ *                                                                                                                                                                                                 *
+ *                                                                                                                                                                                                 *
  *  THE space_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL SPACE PARALLAX EFFECT WOULD BE APPLIED                                                                                    *
  *  THE underwater_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL UNDERWATER PARALLAX EFFECT WOULD BE APPLIED                                                                          *
  *                                                                                                                                                                                                 *
