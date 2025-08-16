@@ -112,6 +112,24 @@
  * FOR ADVANCED USERS ONLY. LAYER PROPERTIES CAN BE ACCESSED VIA SCRIPT:                                                                                                                           *
  * $GAMEMAP.OLAYERSETTINGS[MAPID][LAYERID].PROPERTY                                                                                                                                                *
  * "PROPERTY" BEING THE ABOVE PROPERITES IN LOWERCASE.                                                                                                                                             *
+ ***************************************************************************************************************************************************************************************************
+ * *********************************************************************************************************************************************************************************************** *
+ *                                                            *   APPLYING PARALLAXES TO MAPS WITH THE CONFIGURATION SECTION                                                                       *
+ * *********************************************************************************************************************************************************************************************** *
+ *  TO KEEP THE CONFIGURATIONS MADE TO THE SPACE PARALLAX EASILY MODIFIABLE A LOT OF THE CODE IS WRITTEN HERE IN THE PLUGIN.
+ *  THE PLUGIN TAKES MULTIPLE LISTS OF MAPIDS ONTO WHICH TO APPLY A CERTAIN PARALLAX EFFECT. 
+ *  ALL THE LISTS ARE WITHOUT SPACES AND MAPIDS ARE SEPARATED BY A COMMA. FOR EXAMPLE: 158,35,122,43 
+ *  THE space_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL SPACE PARALLAX EFFECT WOULD BE APPLIED
+ *  THE underwater_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL UNDERWATER PARALLAX EFFECT WOULD BE APPLIED
+ 
+ *  THE special_parallax PARAMETER CONTAINS ALL THE MAPS WITH A SPECIFIC PARALLAX EFFECT TO APPLIED TO THEM. IF YOU WANT ADD A NEW EFFECT TO A SPECIFIC MAP, IT IS RECOMMENDED TO ADD IT'S ID TO
+    THIS PARAMETER AND IMPLEMENT THE EFFECT IN THE SPECIAL_PARALAX SWITCH CASE BELOW.
+
+    IF YOU WANT TO ADD A NEW PARALLAX EFFECT TO MULTIPLE MAPS, IT'S RECOMMENDED TO CREATE A NEW PARAMETER WITH THE LIST OF MAPIDS, AND LATER IMPLEMENT IT IN THE BOTTOM OF THE CONFIG SECTION
+    LIKE THE SPACE AND UNDERWATER PARALLAXES.
+    JUST MAKE SURE NOT TO HAVE THE SAME MAP ID IN TWO PARAMETERS, IF SO THE PARAMETER THAT IS USED FIRST WILL BE THE ONLY ONE TO BE APPLIED.
+ *
+ * 
  ***************************************************************************************************************************************************************************************************/
 
 
@@ -124,6 +142,9 @@ OLayers.LG = {};      // methods and such in plugin
 
 OLayers.LG.parallaxMaps = {};
 
+// Pass the mapId array to a dedicated spot, for easy use.
+// If you plan to add an effect to a single screen, add it to the 'special_parallax'
+// If you plan to add an effect to multiple screens, create a new parameter and insert into OLayers.LG.parallax, like done bellow.
 OLayers.LG.parallaxMaps['special_parallax'] = PluginManager.parameters('Omori Parallax Config')['Special Parallax'].split(',') || [];
 OLayers.LG.parallaxMaps['space_parallax'] = PluginManager.parameters('Omori Parallax Config')['Space Parallax'].split(',') || [];
 OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori Parallax Config')['Underwater Parallax'].split(',') || [];
@@ -160,6 +181,7 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
                         $dataMap.note = `${$dataMap.note}\nLAYER_BG 1 space_parallax_1 0 0 Graphics.width Graphics.height 0.2 0 255 0 0 2 0\nLAYER_BG 2 space_parallax_2 0 0 Graphics.width Graphics.height 0.3 0 255 0 3 15 0\nLAYER_BG 3 space_parallax_3 0 0 Graphics.width Graphics.height 0.4 0 255 0 5 20 0`
                     }
                     break;
+                // CREATE more special parallaxes here with the respective mapId
             }
             // Clear the default parallax set by the game as it's not necessary anymore.
             return;
@@ -184,6 +206,10 @@ OLayers.LG.parallaxMaps['underwater_parallax'] = PluginManager.parameters('Omori
             // Clear the default parallax set by the game as it's not necessary anymore.
             return;
         }
+
+        // If you want to add the same parallax effect to multiple screen at the same times, this is the place.
+        // Just use the mapIds array, as done above, and read it to see if the current mapId is contained there.
+        // If so, invoke LAYER_BG in the maps' notes.
     }
 
     /***************************************
