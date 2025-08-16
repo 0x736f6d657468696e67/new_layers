@@ -116,20 +116,20 @@
  * *********************************************************************************************************************************************************************************************** *
  *                                                            *   APPLYING PARALLAXES TO MAPS WITH THE CONFIGURATION SECTION                                                                       *
  * *********************************************************************************************************************************************************************************************** *
- *  TO KEEP THE CONFIGURATIONS MADE TO THE SPACE PARALLAX EASILY MODIFIABLE A LOT OF THE CODE IS WRITTEN HERE IN THE PLUGIN.
- *  THE PLUGIN TAKES MULTIPLE LISTS OF MAPIDS ONTO WHICH TO APPLY A CERTAIN PARALLAX EFFECT. 
- *  ALL THE LISTS ARE WITHOUT SPACES AND MAPIDS ARE SEPARATED BY A COMMA. FOR EXAMPLE: 158,35,122,43 
- *  THE space_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL SPACE PARALLAX EFFECT WOULD BE APPLIED
- *  THE underwater_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL UNDERWATER PARALLAX EFFECT WOULD BE APPLIED
- 
- *  THE special_parallax PARAMETER CONTAINS ALL THE MAPS WITH A SPECIFIC PARALLAX EFFECT TO APPLIED TO THEM. IF YOU WANT ADD A NEW EFFECT TO A SPECIFIC MAP, IT IS RECOMMENDED TO ADD IT'S ID TO
-    THIS PARAMETER AND IMPLEMENT THE EFFECT IN THE SPECIAL_PARALAX SWITCH CASE BELOW.
-
-    IF YOU WANT TO ADD A NEW PARALLAX EFFECT TO MULTIPLE MAPS, IT'S RECOMMENDED TO CREATE A NEW PARAMETER WITH THE LIST OF MAPIDS, AND LATER IMPLEMENT IT IN THE BOTTOM OF THE CONFIG SECTION
-    LIKE THE SPACE AND UNDERWATER PARALLAXES.
-    JUST MAKE SURE NOT TO HAVE THE SAME MAP ID IN TWO PARAMETERS, IF SO THE PARAMETER THAT IS USED FIRST WILL BE THE ONLY ONE TO BE APPLIED.
- *
- * 
+ *  TO KEEP THE CONFIGURATIONS MADE TO THE SPACE PARALLAX EASILY MODIFIABLE A LOT OF THE CODE IS WRITTEN HERE IN THE PLUGIN.                                                                       *
+ *  THE PLUGIN TAKES MULTIPLE LISTS OF MAPIDS ONTO WHICH TO APPLY A CERTAIN PARALLAX EFFECT.                                                                                                       *
+ *  ALL THE LISTS ARE WITHOUT SPACES AND MAPIDS ARE SEPARATED BY A COMMA. FOR EXAMPLE: 158,35,122,43                                                                                               *
+ *  THE space_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL SPACE PARALLAX EFFECT WOULD BE APPLIED                                                                                    *
+ *  THE underwater_parallax PARAMETER CONTAINS ALL THE MAP IDS WHERE A NORMAL UNDERWATER PARALLAX EFFECT WOULD BE APPLIED                                                                          *
+ *                                                                                                                                                                                                 *
+ *  THE special_parallax PARAMETER CONTAINS ALL THE MAPS WITH A SPECIFIC PARALLAX EFFECT TO APPLIED TO THEM. IF YOU WANT ADD A NEW EFFECT TO A SPECIFIC MAP, IT IS RECOMMENDED TO ADD IT'S ID TO   *
+ *  THIS PARAMETER AND IMPLEMENT THE EFFECT IN THE SPECIAL_PARALAX SWITCH CASE BELOW.                                                                                                              *
+ *                                                                                                                                                                                                 *
+ *  IF YOU WANT TO ADD A NEW PARALLAX EFFECT TO MULTIPLE MAPS, IT'S RECOMMENDED TO CREATE A NEW PARAMETER WITH THE LIST OF MAPIDS, AND LATER IMPLEMENT IT IN THE BOTTOM OF THE CONFIG SECTION      *
+ *  LIKE THE SPACE AND UNDERWATER PARALLAXES.                                                                                                                                                      *
+ *  JUST MAKE SURE NOT TO HAVE THE SAME MAP ID IN TWO PARAMETERS, IF SO THE PARAMETER THAT IS USED FIRST WILL BE THE ONLY ONE TO BE APPLIED.                                                       *
+ *                                                                                                                                                                                                 *
+ *                                                                                                                                                                                                 *
  ***************************************************************************************************************************************************************************************************/
 
 
