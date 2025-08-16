@@ -23,10 +23,16 @@
  *                                               **************************************************************************************************                                                *
  *                                                                 THIS SCRIPT ASSIGNS PARALLAX CONFIGURATIONS TO DESIGNATED MAPS.                                                                 *
  * *********************************************************************************************************************************************************************************************** *
+ * *********************************************************************************************************************************************************************************************** *
  *                   THE MODIFIED GALV_LAYERGRAPHICS IS CONFIGURED TO WORK WITH THE PARALLAXES APPLIED. IT ALSO INCLUDES A MODIFIED VERSION OF THE 'LAYER' COMMAND - 'LAYER_BG'                    *
- *                                                             (DOCUMENTATION ON IT IS IN THE MODIFIED GALV_LAYERGRAPHICS.JS PLUGIN.)                                                              *
+ *                                                                                                                                                                                                 *
  *             IT'S DIFFERENCE FROM THE NORMAL 'LAYER' COMMAND IS ONLY THAT IT LETS THE USER CHOOSE A POSITION AND DIMENSIONS FOR THE CANVAS ON WHICH THE LAYER WILL BE DRAWNED UPON.              *
  *   THIS IS USEFUL FOR SCENES IN OMORI WHERE EFFECTS SUCH AS SHAKING THE SCREEN IS USED: THE EDGES OF CANVAS MAY APPEAR IN THE CORNERS AND BY SETTING THE LAYER BEYOND THE EDGE WE COVER IT UP.   *
+ * *********************************************************************************************************************************************************************************************** *
+ *                                                                                           SETUP                                                                                                 *
+ * *********************************************************************************************************************************************************************************************** *
+ *                                                   ALL THE PARALLAX LAYERS HOULD BE PLACED IN A NEW DIRECTORY IN /img NAMED /layers                                                              *
+ *                                  CALL A CUSTOM PARALLAX WHEN INVOKING THE LAYER_BG COMMAND - EXPLAINED THEREINAFTER - BY ENTERING THE IMAGE FILE'S NAME                                         *
  * *********************************************************************************************************************************************************************************************** *
  *                                                                                   *   PLUGIN COMMANDS (QUICK)                                                                                   *
  * *********************************************************************************************************************************************************************************************** *
@@ -40,9 +46,9 @@
  * *********************************************************************************************************************************************************************************************** *
  * WHEN CREATING A BACKGROUND LAYER YOU CAN USE:                                                                                                                                                   *  
  *                                                                                                                                                                                                 *
- *  LAYER_BG MAPID ID GRAPHIC CANVASX CANVASY WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND                                                                                             *
+ * LAYER_BG MAPID ID GRAPHIC CANVASX CANVASY WIDTH HEIGHT XSPEED YSPEED OPACITY Z XSHIFT YSHIFT BLEND                                                                                              *
  *                                                                                                                                                                                                 *
- *EACH PROPERTY IS SEPARATED BY A SPACE AND YOU WILL EXCHANGE THE PROPERTY NAMES ABOVE WITH VALUES.                                                                                                *
+ * EACH PROPERTY IS SEPARATED BY A SPACE AND YOU WILL EXCHANGE THE PROPERTY NAMES ABOVE WITH VALUES.                                                                                               *
  *                                                                                                                                                                                                 *
  *                                                                                                                                                                                                 *
  *  EXPLANATION OF PROPERTIES:                                                                                                                                                                     *
